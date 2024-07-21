@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    void generatePermutations(int start, vector<int> &nums,vector<vector<int>> &result){
+        if(start >=nums.size()){
+            result.push_back(nums);
+            return;
+        }
+        unordered_set<int>seen;
+        for(int i = start;i<nums.size();++i){
+            if(seen.find(nums[i])!=seen.end()) continue;
+            seen.insert(nums[i]);
+            swap(nums[i],nums[start]);
+            generatePermutations(start+1,nums,result);
+            swap(nums[i],nums[start]);
+        }
+    }
+    vector<vector<int>> uniquePerms(vector<int> &arr ,int n) {
+        vector<vector<int>>result;
+        generatePermutations(0,arr,result);
+        sort(result.begin(),result.end());
+        return result;
+    }
+};
