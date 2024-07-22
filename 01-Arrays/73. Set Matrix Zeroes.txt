@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int numOfRows = matrix.size();
+        int numOfCol = matrix[0].size();
+        unordered_set<int>columns;
+        unordered_set<int>rows;
+        for(int i = 0;i<numOfRows;i++){
+            for(int j = 0;j<numOfCol;j++){
+                if(matrix[i][j]==0){
+                    rows.insert(i);
+                    columns.insert(j);
+                }
+            }
+        }
+        for(int i = 0;i<numOfRows;i++){
+            for(int j = 0;j<numOfCol;j++){
+                if(rows.find(i)!=rows.end() || columns.find(j)!=columns.end())
+                    matrix[i][j]=0;
+            }
+        }
+    }
+};
