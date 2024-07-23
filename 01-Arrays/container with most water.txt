@@ -1,0 +1,21 @@
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        left = 0
+        right = len(height)-1
+        _maxArea = 0
+        currentArea = 0
+        while(left<right):
+            if(height[left] > height[right]):
+                currentArea = height[right]*(right-left)
+                if currentArea > _maxArea:
+                    _maxArea = currentArea
+                right -= 1
+            else:
+                currentArea = height[left]*(right-left)
+                if currentArea > _maxArea:
+                    _maxArea = currentArea
+                left += 1
+        
+        return _maxArea
+
+        
