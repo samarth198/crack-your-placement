@@ -1,0 +1,31 @@
+/*The structure of linked list is the following
+
+struct Node
+{
+    int data;
+    Node* next;
+    
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+class Solution
+{
+    public:
+    Node *compute(Node *head)
+    {
+        if(head->next == NULL || head == NULL) return head;
+        
+        Node* connect = compute(head->next);
+        if(head->data >= connect->data){
+            head->next = connect;
+            return head;
+        }
+        return connect;
+    }
+    
+};
+   

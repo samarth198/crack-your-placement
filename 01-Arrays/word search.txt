@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<pair<int,int>> nextCells{{0,1},{1,0},{0,-1},{-1,0}};
+    bool exist(vector<vector<char>>& board, string word) {
+        int rows = board.size();
+        int columns = board[0].size();
+        for(int i = 0;i<rows;i++){
+            for(int j = 0;j<columns;j++){
+                if(backtrack(board,word,i,j,0)) return true;
+            }
+        }
+        return false;
+    }
+
+    bool backtrack(vector<vector<char>>& board,string word,int row,int column,int index){
+        if(index == word.size()) return true;
+        if(row>=board.size() || column >=board[0].size() || row<0 || column<0 || board[row][column] != word[index]) return false;
+
+        bool result = false;
+        char temp = board[row][column];
+        board[row][column] = '#';
+
+        for(auto n : nextCells){
+            result = backtrack(board,word,row+n.first,column+n.second,index+1);
+            if(result) break;
+        }
+
+        board[row][column] = temp;
+        return result;
+    }
+};
